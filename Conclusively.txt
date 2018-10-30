@@ -1,0 +1,84 @@
+__________________________POS__________________________________
+#include <bits/stdc++.h>
+using namespace std;
+
+int m[8] {1, 5, 10, 20, 50, 100, 500, 1000};
+int max_bill(int n) {
+    int i = 7;
+    if (n < 1000) {
+        if (n < 500) {
+            if (n < 100) {
+                if (n < 50) {
+                    if (n < 20) {
+                        if (n < 10) {
+                            if (n < 5) {
+                                return m[0];
+                            } return m[1];
+                        } else return m[2];
+                    } else return m[3];
+                } else return m[4];
+            } else return m[5];
+        } else return m[6];
+    } else return m[7];
+}
+
+void which_bills(int n) {
+    do { cout << max_bill(n) << ' ';
+         n = n - max_bill(n);
+    } while (n > 0);
+    cout << '\n';
+}
+
+int main() {
+    int payment ,price;
+    while (cin >> payment >> price && (payment || price)) {
+        if (payment - price > 1) {
+            cout << payment - price << ": "; which_bills(payment - price);
+        } else continue;
+    }
+    return 0;
+}
+
+_______________________________________Find prime numbers.________________________________
+#include <bits/stdc++.h>
+#include <cmath>
+
+using namespace std;
+
+bool isPrime(int n) {
+    if (n > 1) {
+        for (int k = 2; k <= sqrt(n); ++k) 
+            if (n % k == 0)
+                return false;
+    } else return false;
+         
+    return true;
+}
+
+int main() {
+    int n; 
+    while (cin >> n, n) {
+        for (int i = 1; i <= n; i++)
+            if (isPrime(i))
+                cout << i << " ";
+        cout << '\n';
+    }
+}
+
+_____________________________________Doors in the underworld._________________________________
+#include <bits/stdc++.h>
+using namespace std;
+bool x[1000001] = {false};
+
+int main() {
+
+    for (int i = 1; i <= 1000; i++)
+        for (int k = 1; k*i <= 1000; k++)
+            x[i * k] = !x[i * k];
+
+    int rs = 0;
+    for (int i = 1; i <= 1000; i++) {
+        if (x[i]) rs++;
+    }
+    cout << rs << '\n';
+}
